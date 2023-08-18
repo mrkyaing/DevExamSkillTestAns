@@ -1,0 +1,35 @@
+﻿@model EmployeeViewModel
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<div class="container">
+    <h1>Employee Edit</h1>
+    <hr />
+    <form action="/employee/update" method="post">
+        <input type="hidden" name="Id" value=@Model.Id/>
+        <div class="mb-3"> 
+            <label class="form-label">First Name</label>
+            <input class="form-control" type="text" name="FirstName" required value=@Model.FirstName />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" type="text" name="LastName" required value=@Model.LastName />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">DOB</label>
+            <input class="form-control" type="date" id="dtpDOB" name="DateofBirth" required value=@Model.DateofBirth.ToString("yyyy-MM-dd") />
+        </div>
+        <input class="btn btn-success" type="submit" value="Update">      <a href="/employee/Index" class="btn btn-warning" role="button">Cancel</a>
+    </form>
+</div>
+<script>
+    $("#dtpDOB").on("change", function () {
+        var now = new Date();//2023-07-30-12:43
+        var dob = new Date($("#dtpDOB").val());//1998-01-02
+        var age = now.getFullYear() - dob.getFullYear();
+        if (age < 18) {
+            alert("Your are not over 18 years")
+        }
+    });
+</script>
