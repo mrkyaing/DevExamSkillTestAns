@@ -44,17 +44,18 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#btnRefresh").click(function () {
+        $("#btnRefresh").click(function (evt) {
+            evt.preventDefault();
+            debugger;
             $.ajax({
                 type: 'GET',
-                url: '/employee/List',
-                datatype: JSON,
-                success: function (data) {
+                url: '/employee/list',
+                success: function (employees) {
                     $('#employeeTable tbody').empty();
-
-                    $.each(data, function (i, item) {
+               
+                    $.each(employees, function (i, item) {
                         var rows = "<tr>"
-                            + "<td>" + 1 + "</td>"
+                            + "<td>" + (i+=1)+ "</td>"
                             + "<td>" + item.FirstName + "</td>"
                             + "<td>" + item.LastName + "</td>"
                             + "<td>" + item.DateofBirth + "</td>"
@@ -62,7 +63,7 @@
                         $('#employeeTable tbody').append(rows);
                     });
                 },
-                error: function (data) { }
+                error: function (employees) { }
             });
         });
     });
